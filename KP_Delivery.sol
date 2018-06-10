@@ -1,3 +1,6 @@
+/// This is made for KP-Hackerton in 2018.
+/// Made by Team Chainerator, BLUE
+/// Ver 0.1
 pragma solidity ^0.4.0;
 contract KP{
     struct Postman{
