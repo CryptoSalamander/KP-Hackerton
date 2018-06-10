@@ -35,11 +35,19 @@ contract KP{
         _phone = postmans[_index].phone;
     }
     function RegistPostman(string _code,string _name,string _phone) public returns(uint index){
+        if(msg.sender != owner)
+        {
+            return;
+        }
         index = numPostmans++;
         postmans[index] = Postman(_code,_name,_phone);
     }
     
     function NewDelivery(string _code) public returns(uint index){
+        if(msg.sender != owner)
+        {
+            return;
+        }
         index = numDeliverys++;
         deliverys[index] = Delivery(_code,0,0,0,0,0,0,false,false,false);
     }
