@@ -16,6 +16,7 @@ contract KP{
         uint temperature;
         uint humidity;
         uint damage;
+        address to;
         bool damaged;
         bool success;
         bool unnormal;
@@ -46,13 +47,13 @@ contract KP{
         postmans[index] = Postman(_code,_name,_phone);
     }
     
-    function NewDelivery(string _code) public returns(uint index){
+    function NewDelivery(string _code,address _to) public returns(uint index){
         if(msg.sender != owner)
         {
             return;
         }
         index = numDeliverys++;
-        deliverys[index] = Delivery(_code,0,0,0,0,0,0,false,false,false);
+        deliverys[index] = Delivery(_code,0,0,0,0,0,0,_to,false,false,false);
     }
     
     function GetDelivery(uint _index) public constant returns (string _mycode, uint _postman_index,uint _longi, uint _lati,uint _temperature,uint _humidity,bool _damaged){
@@ -96,6 +97,10 @@ contract KP{
     }
     
     function DeliveryComplete(uint _index) public{
+        if(msg.sender != deliverys[_index].to)
+        {
+            return;
+        }
         deliverys[_index].success = true;
     }
 }
