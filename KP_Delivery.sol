@@ -17,7 +17,7 @@ contract KP{
         uint humidity;
         uint damage;
         bool damaged;
-        bool complete;
+        bool success;
         bool unnormal;
     }
     mapping(uint => Delivery) deliverys;
@@ -93,5 +93,9 @@ contract KP{
             deliverys[_index].damaged = true;
         }
         deliverys[_index].damage = damage;
+    }
+    
+    function DeliveryComplete(uint _index) public{
+        deliverys[_index].success = true;
     }
 }
